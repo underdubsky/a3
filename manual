@@ -1,0 +1,7 @@
+git init #инициализируем папку
+git clone git://github.com/underdubsky/*.git #клонируем репозиторий ИЗ гитхаба (создаст папку в которой находишься папку с названием репозитория)
+git remote add <как будет называться на машине> https://github.com/underdubsky/*.git #создаем привязку по ярлыку к репозиторию (git remote add a3 https://github.com/underdubsky/a3.git)
+git remote rm <имя ярлыка> #удалить ярлык репозитория (git remote rm a3)
+git add <имя файла> #добавить файл на загрузку в гитх
+git commit -m <коммит> #добавить коммит изменения
+git push <ярлык репозитория> <имя версии> #заливка в репозиторий (git push a3 master)
