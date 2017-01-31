@@ -1,2 +1,2 @@
 #!/bin/bash
-steamcmd +runscript /home/lanek/arma3/a3update.txt
+/home/lanek/.steam/steamcmd/steamcmd.sh +runscript /home/lanek/arma3/update.txt
