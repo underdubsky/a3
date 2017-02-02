@@ -1,0 +1,75 @@
+Итак, вначале установим пакет lm-sensors.
+Делается это так
+
+# sudo apt-get install lm-sensors
+
+После чего утилите необходимо определить устройства чтобы корректно отображать температуру, напряжение CPU и скорость вращения кулеров.
+Делается это тоже довольно просто. Запускаем sensors-detect так:
+
+# sudo sensors-detect
+
+Утилита будет просто засыпать вопросами, на которые нужно отвечать Enter’ом (что по-умолчанию будет означать — yes).
+В самом конце утилита sensors-detect спросит о разрешении добавления необходимых для мониторинга модулей при загрузке системы (файл /etc/modules), на что необходимо будет ввести yes
+
+To load everything that is needed, add this to /etc/modules:
+#----cut here----
+# Chip drivers
+coretemp
+w83627ehf
+#----cut here----
+If you have some drivers built into your kernel, the list above will
+contain too many modules. Skip the appropriate ones!
+
+Do you want to add these lines automatically to /etc/modules? (yes/NO) yes
+Successful!
+
+После чего необходимо перезагрузить ваш компьютер.
+
+После перезагрузки вы можете с помощью команды sensors (обратите внимание что ей не требуется root-полномочия) получать необходимую информацию о температурах процессора, видеокарты и материнской платы, напряжение процессора и скорость вращения кулеров.
+
+# sensors
+
+acpitz-virtual-0
+Adapter: Virtual device
+temp1:        +27.8°C  (crit = +99.0°C)
+temp2:        +29.8°C  (crit = +99.0°C)
+
+coretemp-isa-0000
+Adapter: ISA adapter
+Physical id 0:  +34.0°C  (high = +80.0°C, crit = +98.0°C)
+Core 0:         +34.0°C  (high = +80.0°C, crit = +98.0°C)
+Core 1:         +29.0°C  (high = +80.0°C, crit = +98.0°C)
+Core 2:         +33.0°C  (high = +80.0°C, crit = +98.0°C)
+Core 3:         +33.0°C  (high = +80.0°C, crit = +98.0°C)
+
+nct6776-isa-0290
+Adapter: ISA adapter
+Vcore:         +0.97 V  (min =  +0.00 V, max =  +1.74 V)
+in1:           +1.02 V  (min =  +0.00 V, max =  +0.00 V)  ALARM
+AVCC:          +3.39 V  (min =  +2.98 V, max =  +3.63 V)
++3.3V:         +3.39 V  (min =  +2.98 V, max =  +3.63 V)
+in4:           +1.02 V  (min =  +0.00 V, max =  +0.00 V)  ALARM
+in5:           +2.04 V  (min =  +0.00 V, max =  +0.00 V)  ALARM
+3VSB:          +3.38 V  (min =  +2.98 V, max =  +3.63 V)
+Vbat:          +3.31 V  (min =  +2.70 V, max =  +3.63 V)
+fan1:            0 RPM  (min =    0 RPM)  ALARM
+fan2:         1516 RPM  (min =    0 RPM)  ALARM
+fan3:         1145 RPM  (min =    0 RPM)  ALARM
+fan4:            0 RPM  (min =    0 RPM)  ALARM
+fan5:            0 RPM  (min =    0 RPM)  ALARM
+SYSTIN:        +29.0°C  (high =  +0.0°C, hyst =  +0.0°C)  ALARM  sensor = thermistor
+CPUTIN:        -60.0°C  (high = +80.0°C, hyst = +75.0°C)  sensor = CPU diode
+AUXTIN:        +28.5°C  (high = +80.0°C, hyst = +75.0°C)  sensor = thermistor
+PECI Agent 0:  +22.5°C  
+cpu0_vid:     +0.000 V
+intrusion0:   OK
+intrusion1:   ALARM
+
+radeon-pci-0100
+Adapter: PCI adapter
+temp1:        +43.5°C
+
+В моём выводе программы sensors отображается температура каждого ядра процессора (их у меня 4), напряжения датчиков процессора, скорости вращения кулеров (2 из 5), температуру материнской платы (+29.0°C) и видеокарты (+43.5°C).
+
+Вот и всё.
+Удачи.
